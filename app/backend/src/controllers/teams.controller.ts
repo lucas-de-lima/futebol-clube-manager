@@ -12,9 +12,18 @@ export default class TeamController {
     return res.status(statusCodes.ok).json(response);
   };
 
-  // public getById = async (id) => {
+  public getById = async (req: Request, res: Response) => {
+    const ID = req.params.id; // captura i ID do params que é uma string
+    const id = parseInt(ID, 10); // converte a string para inteiro com a base decimal (base 10)
 
-  // };
+    const response = await this.teamService.getById(id);
+
+    if ('type' in response) {
+      return res.status(response.type).json(response.message);
+    }
+
+    return res.status(200).json(response);
+  };
 
   //   public create = async (team): Promise<> => {
 
