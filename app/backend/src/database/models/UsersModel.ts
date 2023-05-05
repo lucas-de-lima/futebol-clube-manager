@@ -2,22 +2,22 @@ import { INTEGER, STRING, Model } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class User extends Model {
+class UsersModel extends Model {
   declare id: number;
-  declare userName: string;
+  declare username: string;
   declare role: string;
   declare email: string;
   declare password: string;
 }
 
-User.init({
+UsersModel.init({
   id: {
     type: INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  userName: {
+  username: {
     type: STRING,
   },
   role: {
@@ -30,7 +30,6 @@ User.init({
     type: STRING,
   },
 }, {
-  underscored: true,
   sequelize: db,
   modelName: 'user',
   timestamps: false,
@@ -47,4 +46,4 @@ User.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default User;
+export default UsersModel;
