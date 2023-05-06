@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as cors from 'cors';
 import teamRouter from './routes/teamRoutes';
 import loginRouter from './routes/loginRoutes';
 import ErrorHandle from './middlewares/ErrorHandler';
@@ -10,6 +11,7 @@ class App {
     this.app = express();
 
     this.config();
+    this.app.use(cors());
 
     this.app.use('/teams', teamRouter);
     this.app.use('/login', loginRouter);

@@ -10,18 +10,16 @@ export default class LoginController {
     this.loginService = loginService;
   }
 
-  public async login(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      // const loginService = new LoginServices();
       const login: ILogin = req.body;
 
       const response = await this.loginService.inspectLogin(login);
-      console.log(response);
-
       const token = generateToken(response);
+
       res.status(statusCodes.ok).json({ token });
     } catch (error) {
       next(error);
     }
-  }
+  };
 }

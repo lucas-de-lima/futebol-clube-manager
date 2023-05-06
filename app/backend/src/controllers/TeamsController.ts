@@ -5,14 +5,14 @@ import statusCodes from '../utils/statusCodes';
 export default class TeamController {
   constructor(private teamService = new TeamService()) {}
 
-  public async getAll(_req: Request, res: Response) {
+  public getAll = async (_req: Request, res: Response) => {
     const response = await this.teamService.getAll();
     console.log(response);
 
     return res.status(statusCodes.ok).json(response);
-  }
+  };
 
-  public async getById(req: Request, res: Response, next: NextFunction) {
+  public getById = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
 
@@ -22,5 +22,5 @@ export default class TeamController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }
