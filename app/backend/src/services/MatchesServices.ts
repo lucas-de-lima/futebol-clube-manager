@@ -18,6 +18,19 @@ export default class MatchesServices {
     return response;
   }
 
+  public async getByQuery(query: string): Promise<MatchesModel[]> {
+    const response = await this.matchesModel.findAll(
+      {
+        where: { inProgress: JSON.parse(query) },
+        include: [
+          { model: this.teamsModel, as: 'homeTeam' },
+          { model: this.teamsModel, as: 'awayTeam' },
+        ],
+      },
+    );
+    return response;
+  }
+
   public async getById(id: number): Promise<MatchesModel> {
     const response = await this.matchesModel.findByPk(id);
 
