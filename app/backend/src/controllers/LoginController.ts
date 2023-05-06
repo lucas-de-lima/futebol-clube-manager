@@ -22,4 +22,13 @@ export default class LoginController {
       next(error);
     }
   };
+
+  public loginRole = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { role } = req.body.data;
+      res.status(statusCodes.ok).json({ role });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
