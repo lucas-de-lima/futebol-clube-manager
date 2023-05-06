@@ -3,6 +3,7 @@ import * as cors from 'cors';
 import teamRouter from './routes/teamRoutes';
 import loginRouter from './routes/loginRoutes';
 import ErrorHandle from './middlewares/ErrorHandler';
+import matchesRouter from './routes/matchesRoutes';
 
 class App {
   public app: express.Express;
@@ -15,6 +16,7 @@ class App {
 
     this.app.use('/teams', teamRouter);
     this.app.use('/login', loginRouter);
+    this.app.use('/matches', matchesRouter);
 
     this.app.use(ErrorHandle.handle);
 
