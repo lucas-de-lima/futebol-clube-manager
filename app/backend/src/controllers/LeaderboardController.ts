@@ -1,24 +1,21 @@
 import { Request, Response } from 'express';
-import LeaderboardServices from '../services/LeaderboardServices';
+import LeaderboardHomeServices from '../services/LeaderboardHomeServices';
 import statusCodes from '../utils/statusCodes';
+import LeaderboardAwayServices from '../services/LeaderboardAwayServices';
 
 export default class LeaderboardController {
-  constructor(private leaderboardService = new LeaderboardServices()) {}
+  constructor(
+    private leaderboardHomeService = new LeaderboardHomeServices(),
+    private leaderboardAwayService = new LeaderboardAwayServices(),
+  ) {}
 
   public getAllHome = async (_req: Request, res: Response) => {
-    const response = await this.leaderboardService.getAllHome();
+    const response = await this.leaderboardHomeService.getAllHome();
     return res.status(statusCodes.ok).json(response);
   };
 
-  //   public getById = async (req: Request, res: Response, next: NextFunction) => {
-  //     try {
-  //       const { id } = req.params;
-
-  //       const response = await this.teamService.getById(+id);
-
-//       return res.status(200).json(response);
-//     } catch (error) {
-//       next(error);
-//     }
-//   };
+  public getAllAway = async (_req: Request, res: Response) => {
+    const response = await this.leaderboardAwayService.getAllAway();
+    return res.status(statusCodes.ok).json(response);
+  };
 }

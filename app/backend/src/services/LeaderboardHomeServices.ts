@@ -2,7 +2,7 @@ import IMatch from '../interfaces/matchInterface';
 import MatchesServices from './MatchesServices';
 import TeamService from './TeamsServices';
 
-export default class LeaderboardServices {
+export default class LeaderboardHomeServices {
   constructor(
     private matchesServices = new MatchesServices(),
     private teamsService = new TeamService(),
@@ -72,29 +72,29 @@ export default class LeaderboardServices {
   }
 
   private static getTotalGoalsBalanceHome(teamMatches: IMatch[]): number {
-    const value = LeaderboardServices.getTotalGoalsFavorHome(teamMatches)
-       - LeaderboardServices.getTotalGoalsOwnHome(teamMatches);
+    const value = LeaderboardHomeServices.getTotalGoalsFavorHome(teamMatches)
+       - LeaderboardHomeServices.getTotalGoalsOwnHome(teamMatches);
     return value;
   }
 
   private static getTotalEfficiencyHome(teamMatches: IMatch[]): number {
-    const value = (LeaderboardServices.getTotalPointsHome(teamMatches)
-    / (LeaderboardServices.getTotalGamesHome(teamMatches) * 3)) * 100;
+    const value = (LeaderboardHomeServices.getTotalPointsHome(teamMatches)
+    / (LeaderboardHomeServices.getTotalGamesHome(teamMatches) * 3)) * 100;
     return value;
   }
 
   private static calculateStatistics(teamMatches: IMatch[], teamName: string) {
     return {
       name: teamName,
-      totalPoints: LeaderboardServices.getTotalPointsHome(teamMatches),
-      totalGames: LeaderboardServices.getTotalGamesHome(teamMatches),
-      totalVictories: LeaderboardServices.getTotalVictoriesHome(teamMatches),
-      totalDraws: LeaderboardServices.getTotalDrawsHome(teamMatches),
-      totalLosses: LeaderboardServices.getTotalLossesHome(teamMatches),
-      goalsFavor: LeaderboardServices.getTotalGoalsFavorHome(teamMatches),
-      goalsOwn: LeaderboardServices.getTotalGoalsOwnHome(teamMatches),
-      goalsBalance: LeaderboardServices.getTotalGoalsBalanceHome(teamMatches),
-      efficiency: LeaderboardServices.getTotalEfficiencyHome(teamMatches),
+      totalPoints: LeaderboardHomeServices.getTotalPointsHome(teamMatches),
+      totalGames: LeaderboardHomeServices.getTotalGamesHome(teamMatches),
+      totalVictories: LeaderboardHomeServices.getTotalVictoriesHome(teamMatches),
+      totalDraws: LeaderboardHomeServices.getTotalDrawsHome(teamMatches),
+      totalLosses: LeaderboardHomeServices.getTotalLossesHome(teamMatches),
+      goalsFavor: LeaderboardHomeServices.getTotalGoalsFavorHome(teamMatches),
+      goalsOwn: LeaderboardHomeServices.getTotalGoalsOwnHome(teamMatches),
+      goalsBalance: LeaderboardHomeServices.getTotalGoalsBalanceHome(teamMatches),
+      efficiency: LeaderboardHomeServices.getTotalEfficiencyHome(teamMatches),
     };
   }
 
@@ -104,7 +104,7 @@ export default class LeaderboardServices {
     const response = allTeams.map((team) => {
       const teamMatches: IMatch[] = allMatches
         .filter((match: any) => match.homeTeamId === team.id && match.inProgress === false);
-      return LeaderboardServices.calculateStatistics(teamMatches, team.teamName);
+      return LeaderboardHomeServices.calculateStatistics(teamMatches, team.teamName);
     });
     return response.sort((a, b) => {
       if (a.totalPoints > b.totalPoints) { return -1; }
