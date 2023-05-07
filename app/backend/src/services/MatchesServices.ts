@@ -9,8 +9,8 @@ import statusCodes from '../utils/statusCodes';
 export default class MatchesServices {
   constructor(private matchesModel = MatchesModel, private teamsModel = TeamsModel) {}
 
-  public async getAll(): Promise<MatchesModel[]> {
-    const response = await this.matchesModel.findAll(
+  public async getAll(): Promise<IMatch[] | MatchesModel[]> {
+    const response: IMatch[] | MatchesModel[] = await this.matchesModel.findAll(
       {
         include: [
           { model: this.teamsModel, as: 'homeTeam' },
@@ -21,7 +21,7 @@ export default class MatchesServices {
     return response;
   }
 
-  public async getByQuery(query: string): Promise<MatchesModel[]> {
+  public async getByQuery(query: string): Promise<IMatch[] | MatchesModel[]> {
     const response = await this.matchesModel.findAll(
       {
         where: { inProgress: JSON.parse(query) },
@@ -34,7 +34,7 @@ export default class MatchesServices {
     return response;
   }
 
-  public async getById(id: number): Promise<MatchesModel | null> {
+  public async getById(id: number): Promise<IMatch | MatchesModel | null> {
     const response = await this.matchesModel.findByPk(id);
     return response;
   }
