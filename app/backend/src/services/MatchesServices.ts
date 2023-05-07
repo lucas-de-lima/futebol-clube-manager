@@ -1,3 +1,5 @@
+// import { response } from 'express';
+import IMatch from '../interfaces/matchInterface';
 import CustomError from '../utils/CustomError';
 import TeamsModel from '../database/models/TeamsModel';
 import MatchesModel from '../database/models/MatchesModel';
@@ -37,6 +39,17 @@ export default class MatchesServices {
     if (response === null) {
       throw new CustomError(statusCodes.badRequest, 'Team not found');
     }
+    return response;
+  }
+
+  public async updateById(
+    id: number,
+    { homeTeamGoals, awayTeamGoals }: Partial<IMatch>,
+  ) {
+    await this.matchesModel.update({ homeTeamGoals }, { where: { id } });
+    await this.matchesModel.update({ awayTeamGoals }, { where: { id } });
+
+    const response = await this.getById(id);
     return response;
   }
 
