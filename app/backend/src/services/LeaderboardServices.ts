@@ -106,6 +106,20 @@ export default class LeaderboardServices {
         .filter((match: any) => match.homeTeamId === team.id && match.inProgress === false);
       return LeaderboardServices.calculateStatistics(teamMatches, team.teamName);
     });
-    return response;
+    return response.sort((a, b) => {
+      if (a.totalPoints > b.totalPoints) { return -1; }
+      if (a.totalPoints < b.totalPoints) { return 1; }
+
+      if (a.totalVictories < b.totalVictories) { return 1; }
+      if (a.totalVictories > b.totalVictories) { return -1; }
+
+      if (a.goalsBalance > b.goalsBalance) { return -1; }
+      if (a.goalsBalance < b.goalsBalance) { return 1; }
+
+      if (a.goalsFavor > b.goalsFavor) { return -1; }
+      if (a.goalsFavor < b.goalsFavor) { return 1; }
+
+      return 0;
+    });
   }
 }
