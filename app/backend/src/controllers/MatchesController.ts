@@ -1,4 +1,5 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
+import IMatchCreate from '../interfaces/matchCreateInterface';
 import statusCodes from '../utils/statusCodes';
 import MatchesServices from '../services/MatchesServices';
 
@@ -28,5 +29,15 @@ export default class MatchesController {
     const update = req.body;
     const response = await this.matchesService.updateById(+id, update);
     res.status(statusCodes.ok).json(response);
+  };
+
+  public create = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const match: IMatchCreate = req.body;
+      const response = await this.matchesService.create(match);
+      res.status(statusCodes.created).json(response);
+    } catch (error) {
+      next(error);
+    }
   };
 }
