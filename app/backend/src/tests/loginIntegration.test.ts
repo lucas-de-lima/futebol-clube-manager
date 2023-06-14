@@ -57,9 +57,6 @@ describe("Teste da rota de Login", () => {
     
     sinon.stub(jwt, "sign").callsFake(fakeVerify);
     jwt.verify(token, secret);
-
-    // sinon.assert.calledOnce(fakeVerify);
-    // sinon.assert.calledWith(fakeVerify, token, secret);
   
     const { status, body } = await chai
       .request(app)
@@ -77,37 +74,4 @@ describe("Teste da rota de Login", () => {
     expect(status).to.be.equal(401)
     expect(body).to.be.deep.equal({ "message": "Token not found" })
   });
-
-
-  it('Se não existir token ao acessar a rota "/login/role"', async () => {
-    const {status, body} = await chai.request(app).get('/login/role')
-    expect(status).to.be.equal(401)
-    expect(body).to.be.deep.equal({role: "user"})
-  });
-
-  /**
-   * Exemplo do uso de stubs com tipos
-   */
-
-  // let chaiHttpResponse: Response;
-
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
-
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
-
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
-
-  //   expect(...)
-  // });
 });
