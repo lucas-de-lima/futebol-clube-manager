@@ -1,10 +1,19 @@
 # :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+
+Recursos:
+
+✅ Gerenciamento de times, usuários e partidas
+
+✅ Autenticação segura para os usuários
+
+✅ Geração automática de classificações
+
+✅ Testes abrangentes para garantir a qualidade
+
+O desafio foi desenvolver o Back-End (o Front-End foi desenvolvido pelo time da trybe).
+
+Desenvolvido em TypeScript, ORM Sequelize e autenticação de usuários com JWT(Json Web Token) além de usar arquitetura MSC (Model, Service, Controller).
+
+Testado com Sinon e Chai, com validações de entrada usando JOI. 
+
+O projeto usa docker para deixar a aplicação on-line, isto é, subir o front-end e o back-end (com healthcheck).
